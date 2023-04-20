@@ -2,62 +2,69 @@
 <html>
 <head>
     <title>Registration Form</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Registration Form</h1>
-    
-    <form th:action="@{/register}" th:object="${user}" method="post">
-        
-        <label>UserName:</label>
-        <input type="text" th:field="*{username}" required>
-        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
-        <br>
-        
-        <label>Password:</label>
-        <input type="password" th:field="*{password}" required>
-        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-        <br>
-        
-        <label>First Name:</label>
-        <input type="text" th:field="*{firstName}" required>
-        <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
-        <br>
-        
-        <label>Last Name:</label>
-        <input type="text" th:field="*{lastName}" required>
-        <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
-        <br>
-        
-        <label>Date of Birth:</label>
-        <input type="date" th:field="*{dob}" required>
-        <span th:if="${#fields.hasErrors('dob')}" th:errors="*{dob}"></span>
-        <br>
-        
-        <label>Address Line 1:</label>
-        <input type="text" th:field="*{addressLine1}" required>
-        <span th:if="${#fields.hasErrors('addressLine1')}" th:errors="*{addressLine1}"></span>
-        <br>
-        
-        <label>Address Line 2(state,city):</label>
-        <input type="text" th:field="*{addressLine2}">
-        <br>
-        
-        <label>Postal Code:</label>
-        <input type="text" th:field="*{postalCode}" required>
-        <span th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}"></span>
-        <br>
-        
-        <label>Phone Number:</label>
-        <input type="text" th:field="*{phoneNumber}" required>
-        <span th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
-        <br>
-        
-        <input type="submit" value="Register">
-    </form>
-    
-    <div th:if="${param.success}">
-        <p>User registered successfully!</p>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h1 class="text-center mb-4">Registration Form</h1>
+                <form th:action="@{/register}" th:object="${user}" method="post">
+                    <div class="form-group">
+                        <label for="username">UserName:</label>
+                        <input type="text" class="form-control" id="username" th:field="*{username}" required>
+                        <span th:if="${#fields.hasErrors('username')}" class="text-danger" th:errors="*{username}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" class="form-control" id="password" th:field="*{password}" required>
+                        <span th:if="${#fields.hasErrors('password')}" class="text-danger" th:errors="*{password}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="firstName">First Name:</label>
+                        <input type="text" class="form-control" id="firstName" th:field="*{firstName}" required>
+                        <span th:if="${#fields.hasErrors('firstName')}" class="text-danger" th:errors="*{firstName}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name:</label>
+                        <input type="text" class="form-control" id="lastName" th:field="*{lastName}" required>
+                        <span th:if="${#fields.hasErrors('lastName')}" class="text-danger" th:errors="*{lastName}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="dob">Date of Birth:</label>
+                        <input type="date" class="form-control" id="dob" th:field="*{dob}" required>
+                        <span th:if="${#fields.hasErrors('dob')}" class="text-danger" th:errors="*{dob}"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="addressLine1">Address Line 1:</label>
+                        <input type="text" class="form-control" id="addressLine1" th:field="*{addressLine1}" required>
+                        <span th:if="${#fields.hasErrors('addressLine1')}" th:errors="*{addressLine1}" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="addressLine2">Address Line 2(state,city):</label>
+                        <input type="text" class="form-control" id="addressLine2" th:field="*{addressLine2}">
+                    </div>
+                    <div class="form-group">
+                        <label for="postalCode">Postal Code:</label>
+                        <input type="text" class="form-control" id="postalCode" th:field="*{postalCode}" required>
+                        <span th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="phoneNumber">Phone Number:</label>
+                        <input type="text" class="form-control" id="phoneNumber" th:field="*{phoneNumber}" required>
+                        <span th:if="${#fields.hasErrors('phoneNumber')}" class="text-danger" th:errors="*{phoneNumber}"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block mt-4">Register</button>
+                </form>
+                <div th:if="${param.success}" class="text-center mt-3">
+                </div>
+            </div>
+        </div>
     </div>
-    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>

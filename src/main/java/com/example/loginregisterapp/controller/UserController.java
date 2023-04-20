@@ -5,7 +5,6 @@ import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
@@ -33,7 +32,7 @@ public class UserController {
         return "index";
   }
 
-  @GetMapping("/register")
+    @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new User());
         return "register";
@@ -46,15 +45,16 @@ public class UserController {
             model.addAttribute("errors", bindingResult.getFieldErrors());
             return "register";
         }
+
         try {
-        userService.saveUser(user);
+            userService.saveUser(user);
         } catch (DataIntegrityViolationException e) {
             bindingResult.rejectValue("username", "error.user", "Username is already taken");
+            model.addAttribute("errors", bindingResult.getFieldErrors());
             return "register";
         }
-    
-    model.addAttribute("success", true);
-    return "register";
+        model.addAttribute("success", true);
+        return "redirect:/login"; // Redirect to login page
     }
       
     @GetMapping("/login")
