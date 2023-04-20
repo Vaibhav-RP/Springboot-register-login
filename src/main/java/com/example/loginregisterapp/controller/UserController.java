@@ -3,9 +3,16 @@ package com.example.loginregisterapp.controller;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.ConstraintViolationException;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,9 +40,21 @@ public class UserController {
     }
     
     @PostMapping("/register")
-    public String processRegistrationForm(@ModelAttribute("user") User user) {
+    public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("errors", bindingResult.getFieldErrors());
+            return "register";
+        }
+        try {
         userService.saveUser(user);
-        return "redirect:/login";
+        } catch (DataIntegrityViolationException e) {
+            bindingResult.rejectValue("username", "error.user", "Username is already taken");
+            return "register";
+        }
+    
+    model.addAttribute("success", true);
+    return "register";
     }
       
     @GetMapping("/login")
@@ -67,5 +86,23 @@ public class UserController {
         } else {
             return "redirect:/login";
         }
+    }
+
+
+
+   
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public String handleValidationException(MethodArgumentNotValidException e, Model model) {
+        model.addAttribute("errorMessage", "Please fix the errors below and resubmit the form.");
+        model.addAttribute("errors", e.getBindingResult().getAllErrors());
+        return "registration-form";
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public String handleConstraintViolationException(ConstraintViolationException e, Model model) {
+        model.addAttribute("errorMessage", "Please fix the errors below and resubmit the form.");
+        model.addAttribute("errors", e.getConstraintViolations());
+        return "registration-form";
     }
 }

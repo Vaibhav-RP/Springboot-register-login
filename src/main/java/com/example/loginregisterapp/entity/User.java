@@ -4,6 +4,7 @@ import lombok.Data;
 import java.time.LocalDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -18,35 +19,38 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(nullable = false,unique = true)
+    @Column(unique = true)
+    @NotBlank(message = "Username is required")
     private String username;
-    
+
+    @Pattern(regexp = "^[a-zA-Z0-9]+$",message = "Password should contain only alphabets and numbers")
     @Size(min = 6, max = 20)
-    @Column(nullable = false)
+    @NotBlank(message = "Password is required")
     private String password;
     
-    @Pattern(regexp = "^[a-zA-Z]+$")
-    @Column(nullable = false)
+    @NotBlank(message = "First Name is required")
+    @Pattern(regexp = "^[a-zA-Z]+$", message = "First Name should contain only alphabets")
     private String firstName;
     
-    @Pattern(regexp = "^[a-zA-Z]+$")
-    @Column(nullable = false)
+    @NotBlank(message = "Last Name is required")
+    @Pattern(regexp = "^[a-zA-Z]+$", message = "Last Name should contain only alphabets")
     private String lastName;
      
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(nullable = false)
     private LocalDate dob;
 
-    @Column(nullable = false)
+    @NotBlank(message = "Address Line 1 is required")
     private String addressLine1;
     
+    @NotBlank(message = "city and state is required")
     private String addressLine2;
         
-    @Column(nullable = false)
+    @NotBlank(message = "Postal Code is required")
+    @Size(min = 6, max = 6, message = "Postal Code should be 6 digits")
     private String postalCode;
     
-    @Pattern(regexp = "^[0-9]+$")
-    @Column(nullable = false)
+    @NotBlank(message = "Phone Number is required")
+    @Pattern(regexp = "^[0-9]+$", message = "Phone Number should contain only numbers")
     private String phoneNumber;
 
 }

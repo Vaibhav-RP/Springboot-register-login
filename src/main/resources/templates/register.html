@@ -8,40 +8,48 @@
     
     <form th:action="@{/register}" th:object="${user}" method="post">
         
-        <label>Username:</label>
+        <label>UserName:</label>
         <input type="text" th:field="*{username}" required>
+        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
         <br>
         
         <label>Password:</label>
         <input type="password" th:field="*{password}" required>
+        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
         <br>
         
         <label>First Name:</label>
         <input type="text" th:field="*{firstName}" required>
+        <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
         <br>
         
         <label>Last Name:</label>
         <input type="text" th:field="*{lastName}" required>
+        <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
         <br>
         
         <label>Date of Birth:</label>
         <input type="date" th:field="*{dob}" required>
+        <span th:if="${#fields.hasErrors('dob')}" th:errors="*{dob}"></span>
         <br>
         
         <label>Address Line 1:</label>
         <input type="text" th:field="*{addressLine1}" required>
+        <span th:if="${#fields.hasErrors('addressLine1')}" th:errors="*{addressLine1}"></span>
         <br>
         
-        <label>Address Line 2:</label>
+        <label>Address Line 2(state,city):</label>
         <input type="text" th:field="*{addressLine2}">
         <br>
         
         <label>Postal Code:</label>
         <input type="text" th:field="*{postalCode}" required>
+        <span th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}"></span>
         <br>
         
         <label>Phone Number:</label>
         <input type="text" th:field="*{phoneNumber}" required>
+        <span th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
         <br>
         
         <input type="submit" value="Register">
@@ -50,5 +58,6 @@
     <div th:if="${param.success}">
         <p>User registered successfully!</p>
     </div>
+    
 </body>
 </html>
