@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Form</title>
+</head>
+<body>
+    <h1>Registration Form</h1>
+    
+    <form th:action="@{/register}" th:object="${user}" method="post">
+        
+        <label>Username:</label>
+        <input type="text" th:field="*{username}" required>
+        <br>
+        
+        <label>Password:</label>
+        <input type="password" th:field="*{password}" required>
+        <br>
+        
+        <label>First Name:</label>
+        <input type="text" th:field="*{firstName}" required>
+        <br>
+        
+        <label>Last Name:</label>
+        <input type="text" th:field="*{lastName}" required>
+        <br>
+        
+        <label>Date of Birth:</label>
+        <input type="date" th:field="*{dob}" required>
+        <br>
+        
+        <label>Address Line 1:</label>
+        <input type="text" th:field="*{addressLine1}" required>
+        <br>
+        
+        <label>Address Line 2:</label>
+        <input type="text" th:field="*{addressLine2}">
+        <br>
+        
+        <label>Postal Code:</label>
+        <input type="text" th:field="*{postalCode}" required>
+        <br>
+        
+        <label>Phone Number:</label>
+        <input type="text" th:field="*{phoneNumber}" required>
+        <br>
+        
+        <input type="submit" value="Register">
+    </form>
+    
+    <div th:if="${param.success}">
+        <p>User registered successfully!</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+    <h1>Welcome, <span th:text="${user.firstName}"></span> <span th:text="${user.lastName}"></span>!</h1>
+    <p>Your username is <span th:text="${user.username}"></span>.</p>
+    <p>Your date of birth is <span th:text="${user.dob}"></span>.</p>
+    <p>Your address is <span th:text="${user.postalCode}"></span>.</p>
+    <p>Your phone number is <span th:text="${user.phoneNumber}"></span>.</p>
+</body>
+</html>
