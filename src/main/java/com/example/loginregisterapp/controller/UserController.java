@@ -54,7 +54,7 @@ public class UserController {
             return "register";
         }
         model.addAttribute("success", true);
-        return "redirect:/login"; // Redirect to login page
+        return "redirect:/login"; 
     }
       
     @GetMapping("/login")
